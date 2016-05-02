@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+  label {color: yellow}
+  body {background-image: url("https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTf-L2B8JFJU5dNp5B6k02I5cqW6rC7KZ0juQO8aH0D97CdM4uXrQ");
+  color:black;
+   }
+
+   h1 {color:white}
+
+  .container {
+    margin:1%;
+
+  }
+  label {display: block;color: lightblue;}
+
+
+
+</style>
+
+
+
+<body >
+
+  <%= form_for @customer ,:html => {:multipart => true} do |f| %>
+    <% if @customer.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+
+        <ul>
+        <% @customer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :adress %><br>
+      <%= f.text_field :adress %>
+    </div>
+    <br>
+    <div>
+      <%= fields_for :pictures do |f_i| %>
+        <%= f_i.file_field :image %>
+        <br>
+      <% end %>
+    </div>
+    <br>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+
+  <% end %>
+</body>
+</html>
